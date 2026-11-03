@@ -136,12 +136,9 @@
   box-shadow: inset 0 -1px 0 var(--border-standard);
 }
 
-/* --- Messages: square; received messages are framed, not filled. ---------- */
+/* --- Messages: square, filled by colour (see minni.css), never framed. ---- */
 :root [data-message-action-anchor] {
   --message-radius: 0px;
-}
-:root [data-message-action-anchor]:not([data-own="true"]) {
-  box-shadow: inset 0 0 0 1px var(--border-prominent);
 }
 
 /* --- Composer: the drawn frame is the object. ------------------------------ */
