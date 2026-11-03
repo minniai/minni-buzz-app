@@ -1,0 +1,143 @@
+/*
+ * minni brand overlay — fork-only file.
+ *
+ * Imported last wherever tokens.css is imported: src/shared/styles/globals.css
+ * (the app), src/app/startup.css (linked from index.html, loads after the app
+ * stylesheet and re-declares every token) and the design-system viewer's
+ * globals.css. Missing from any one of them, the later tokens.css copy wins
+ * and corners, shadows and texture silently revert; fonts and the accent do
+ * not, which makes the failure easy to miss. It changes geometry, elevation,
+ * texture and typefaces by re-declaring shared roles; it holds no colour
+ * literals. The
+ * jade palette and the `minni` accent family live in tokens.css (the guards
+ * only accept palette literals there), inside the fenced
+ * ">>> minni fork … <<< minni fork" blocks.
+ *
+ * Source of the decisions: Minni Design System README — "Every corner is
+ * square", "There is no shadow system", "No gradients, no patterns, no
+ * textures", Barlow for body, Barlow Condensed for headings and labels.
+ *
+ * Upstream never edits this file, so it never conflicts on rebase. If a role
+ * named here is renamed upstream, the override silently stops applying:
+ * pnpm design:check will not notice, so re-read this file after a rebase that
+ * touches the Corner, Elevation or Texture sections of tokens.css.
+ */
+
+/* --- Typefaces. Self-hosted: the app CSP (default-src 'self') blocks
+   Google Fonts and the Adobe Fonts kit that serves BC Barell. Latin subset
+   covers Icelandic (U+0000-00FF). Outside it, glyphs fall back to Inter. --- */
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/minni/barlow-latin-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/minni/barlow-latin-400-italic.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/minni/barlow-latin-500-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/minni/barlow-condensed-latin-400-normal.woff2")
+    format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/minni/barlow-condensed-latin-500-normal.woff2")
+    format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Body and UI. Inter stays behind Barlow so any glyph outside the subset,
+     and any screen that loads before the font, still renders. */
+  --font-sans:
+    "Barlow", "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  /* Headings and labels. Not consumed by upstream components yet; available
+     to fork-owned surfaces (onboarding, harness views) without a new role. */
+  --font-heading: "Barlow Condensed", var(--font-sans);
+
+  /* --- Corners. Square everywhere the shared roles reach. --corner-round is
+     left alone: it draws circles (presence dots, avatars' fallbacks), which
+     are shapes, not corners. --- */
+  --corner-row: 0;
+  --corner-control: 0;
+  --corner-container: 0;
+  --corner-panel: 0;
+  --radius-icon-button: 0;
+  --radius-capsule: 0;
+  --radius-chip: 0;
+  --radius-pill: 0;
+  /* Tailwind's own scale, used by ~25 rounded-* utilities in feature code. */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+
+  /* --- Elevation. No shadows; depth is the drawn frame. The panel keeps its
+     1px edge, now drawn with the standard border role. --- */
+  --shadow-xs: none;
+  --shadow-sm: none;
+}
+
+/* Grounds. White page in light; panels are told apart by their 1px frame,
+   not by a grey shell. Received messages sit on the pane's own surface and
+   are framed in minni-components.css instead of filled. */
+:root {
+  --bg-app: var(--surface-panel);
+  --surface-message: var(--surface-panel);
+}
+:root[data-color-mode="dark"],
+.dark {
+  --surface-message: var(--surface-panel);
+}
+
+/* Elevation and texture are re-declared per mode upstream, so the overlay
+   matches both owners. */
+:root,
+:root[data-color-mode="dark"],
+.dark {
+  --shadow-panel: 0 0 0 1px var(--border-standard);
+  /* No pattern on the shell: the dots resolve to the shell itself. */
+  --texture-dots-color: var(--bg-app);
+}
