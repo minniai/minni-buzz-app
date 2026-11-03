@@ -13,9 +13,10 @@
     // Storage may be denied; the system palette still opens safely.
   }
   document.documentElement.dataset.colorMode = mode;
-  let accent = "citrus";
+  let accent = "minni"; // minni fork (upstream: "citrus")
   try {
     const accents = ["bee", "magenta", "iris", "cobalt", "citrus", "mono"];
+    accents.unshift("minni"); // minni fork
     let value = localStorage.getItem("buzz-accent.v1");
     if (value === null) {
       // The former bubble color carries over; its old "Default" does not.

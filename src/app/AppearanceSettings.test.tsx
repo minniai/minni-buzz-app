@@ -11,6 +11,7 @@ import {
 import userEvent from "@testing-library/user-event";
 import { afterEach, expect, it, vi } from "vitest";
 import { ToastProvider } from "../shared/design-system/ui/Toast";
+import { ACCENTS, DEFAULT_ACCENT } from "../shared/theme/accent";
 import { createAppearance } from "../shared/theme/service";
 import { AppearanceSettings } from "./AppearanceSettings";
 
@@ -264,11 +265,14 @@ it("selects and restores an accent color, including retry after a failed save", 
   );
   expect(
     screen.getAllByRole("button", { name: / accent color$/ }),
-  ).toHaveLength(6);
+  ).toHaveLength(ACCENTS.length);
 
   expect(
-    screen.getByRole("button", { name: "Citrus accent color" }),
-  ).toHaveAttribute("aria-pressed", "true");
+    screen
+      .getAllByRole("button", { name: / accent color$/ })
+      .filter((swatch) => swatch.getAttribute("aria-pressed") === "true")
+      .map((swatch) => swatch.dataset.accent),
+  ).toEqual([DEFAULT_ACCENT]);
   const save = vi
     .spyOn(Storage.prototype, "setItem")
     .mockImplementationOnce(() => {

@@ -5,7 +5,7 @@ import { ACCENTS } from "../design-system/tokens/brand";
 // Shared controls stay neutral; contrast changes message bubbles.
 export { ACCENTS };
 export type Accent = (typeof ACCENTS)[number];
-export const DEFAULT_ACCENT: Accent = "citrus";
+export const DEFAULT_ACCENT: Accent = "minni"; // minni fork (upstream: "citrus")
 export const ACCENT_KEY = "buzz-accent.v1";
 /** The former message-bubble preference; read once when no accent is saved. */
 export const LEGACY_BUBBLE_KEY = "buzz-bubble-color.v1";

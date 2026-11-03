@@ -14,6 +14,7 @@
 @import "../design-system/styles/overlays.css";
 @import "../design-system/styles/chips.css";
 @import "./tokens.css";
+@import "../design-system/styles/brand/minni.css"; /* minni fork: brand overlay, last */
 
 @source "../design-system/ui";
 @source not "../../../tests/fixtures/design-system";
