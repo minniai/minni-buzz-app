@@ -139,6 +139,10 @@ the interface unless an available tool actually supports that action.
 
 ## Optional features and limits
 
+Interface language: this build shows most of the interface in Icelandic when the
+system language is Icelandic. Anything not yet translated, including many error
+messages, stays in English. There is no language setting in the app yet.
+
 - Plugins can add features. **Settings → Plugins → Manage plugins** controls
   them. Do not assume a particular optional plugin is on.
 - Some plugins let the person's other agents on this computer, such as Claude
