@@ -32,6 +32,7 @@
 @import "./chips.css";
 @import "./bento.css";
 @import "./brand/minni.css"; /* minni fork: brand overlay, last */
+@import "./brand/minni-components.css"; /* minni fork */
 @source "../";
 @source "../../../../tests/fixtures/design-system";
 

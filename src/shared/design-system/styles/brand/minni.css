@@ -120,6 +120,18 @@
   --shadow-sm: none;
 }
 
+/* Grounds. White page in light; panels are told apart by their 1px frame,
+   not by a grey shell. Received messages sit on the pane's own surface and
+   are framed in minni-components.css instead of filled. */
+:root {
+  --bg-app: var(--surface-panel);
+  --surface-message: var(--surface-panel);
+}
+:root[data-color-mode="dark"],
+.dark {
+  --surface-message: var(--surface-panel);
+}
+
 /* Elevation and texture are re-declared per mode upstream, so the overlay
    matches both owners. */
 :root,

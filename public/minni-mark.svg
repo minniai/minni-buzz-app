@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 20" aria-hidden="true">
+  <!-- minni mark: three chevrons, one hue deepening left to right. Square caps, no rotation. -->
+  <g fill="none" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M2 2 8 10 2 18" stroke="#8fbcac"/>
+    <path d="M14 2 20 10 14 18" stroke="#6ba491"/>
+    <path d="M26 2 32 10 26 18" stroke="#4e8a78"/>
+  </g>
+</svg>
