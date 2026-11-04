@@ -121,15 +121,35 @@
 }
 
 /* Grounds. White page in light; panels are told apart by their 1px frame,
-   not by a grey shell. Received messages sit on the pane's own surface and
-   are framed in minni-components.css instead of filled. */
+   not by a grey shell. Messages are told apart by fill, never by a frame: a
+   frame boxes each message off from the conversation around it. Received
+   messages take the accent's quiet tint, own messages one step deeper. */
 :root {
   --bg-app: var(--surface-panel);
-  --surface-message: var(--surface-panel);
+  --surface-message: var(--accent-3);
 }
 :root[data-color-mode="dark"],
 .dark {
-  --surface-message: var(--surface-panel);
+  --surface-message: var(--accent-3);
+}
+/* The arrival cue must still read on a tinted received bubble. Matches the
+   accent mode owners in tokens.css, which set it to the same step. */
+[data-accent][data-color-mode="light"],
+.light,
+:root,
+[data-accent][data-color-mode="dark"],
+:root[data-color-mode="dark"],
+.dark {
+  --surface-message-highlight: var(--accent-6);
+}
+/* Chillin' (touch) own bubbles sit one step above the received tint. Same
+   selectors as the upstream vibe owners in tokens.css, so this later rule
+   wins without raising specificity. Buzzin' (high) keeps its strong fill. */
+:root[data-color-level="touch"],
+[data-color-level="touch"] .light,
+:root[data-color-level="touch"][data-color-mode="dark"],
+[data-color-level="touch"] .dark {
+  --surface-message-own: var(--accent-5);
 }
 
 /* Elevation and texture are re-declared per mode upstream, so the overlay

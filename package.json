@@ -12,6 +12,7 @@
     "dev:desktop": "vite --strictPort --force",
     "build": "pnpm typecheck && vite build",
     "preview": "vite preview",
+    "i18n:extract": "node scripts/minni-i18n/extract.mjs",
     "author:build": "node scripts/build-author.mjs",
     "buzz-mcp": "vite build --config vite.buzz-mcp.config.ts",
     "typecheck": "tsc --noEmit",
