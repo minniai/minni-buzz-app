@@ -125,7 +125,7 @@
 /* --- Sidebar section headings: kickers over a hairline. -------------------- */
 #shell-navigation
 :is(.navigation-section-label, summary, .buzz-content-header-title) {
-  @apply text-caption;
+  @apply text-label-sm;
   font-family: var(--font-heading);
   font-weight: 500;
   text-transform: uppercase;
