@@ -248,9 +248,9 @@ it.each(ACCENTS)(
   },
 );
 
-it("the default Citrus accent keeps its strong fill and paired black ink", () => {
+it("the Citrus accent keeps its strong fill and paired black ink", () => {
   for (const mode of ["light", "dark"] as const) {
-    const palette = resolvedPalette(mode);
+    const palette = resolvedPalette(mode, "citrus");
     expect(palette["--affordance-accent-prominent"]).toBe("#beda36");
     expect(palette["--text-on-accent"]).toBe("#000000");
   }

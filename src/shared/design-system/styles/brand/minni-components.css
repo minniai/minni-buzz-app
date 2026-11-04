@@ -1,0 +1,168 @@
+/*
+ * minni brand: component skin — fork-only file.
+ *
+ * Imported last from the two Tailwind entry points (src/shared/styles/globals.css
+ * for the app, ../globals.css for the design viewer). Not from startup.css: that
+ * file has no Tailwind, and these rules are not re-declared there, so order
+ * cannot defeat them.
+ *
+ * The rules are unlayered, so they win over `@layer components` without raising
+ * specificity. Message bubbles are the exception: their radius is set by an
+ * unlayered CSS module, so those rules carry a `:root` prefix to outrank it.
+ *
+ * Hooks are upstream's public ones only: design-system class names
+ * (.buzz-tabs, .chrome-navigation, .shell-history, .shell-search-action,
+ * .navigation-section-label, .buzz-content-header-title),
+ * data attributes (data-variant, data-selected, data-own, data-avatar-shape,
+ * data-message-action-anchor, data-composer-surface) and ids that ARIA
+ * references (#shell-navigation). Never hashed CSS-module class names.
+ * If upstream renames one of these, its rule stops matching and the screen
+ * falls back to upstream's look; nothing breaks. After a rebase, compare the
+ * screens against the minni canvas.
+ *
+ * Brand source: Minni Design System README. Labels and kickers are uppercase
+ * Barlow Condensed with wide tracking; frames are 1px lines; one accent; no
+ * fills behind long-form content; never a coloured left border.
+ */
+
+/* --- Shell: wordmark at the leading edge of the header. ---------------------
+   A pseudo-element keeps AppShell.tsx untouched. The text is real text, so
+   it is read as "minni"; the mark is decoration on its background. */
+.shell-history::before {
+  @apply text-heading;
+  content: "minni";
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  padding-inline-start: 2.625rem;
+  margin-inline-end: var(--space-4);
+  background: url("/minni-mark.svg") left center / 2.25rem 1.25rem no-repeat;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  color: var(--text-standard);
+  white-space: nowrap;
+}
+:root[data-color-mode="dark"] .shell-history::before {
+  background-image: url("/minni-mark-on-ink.svg");
+}
+
+/* --- Top bar pages: flat, framed, hairline-separated, jade underline. ------ */
+.chrome-navigation {
+  background: transparent;
+}
+.shell-search-action .buzz-button {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--border-standard);
+}
+.shell-search-action .buzz-button:hover {
+  background: var(--affordance-chrome-hover);
+}
+.buzz-tabs[data-variant="chrome"] {
+  height: 2.5rem;
+  padding: 0;
+  gap: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--border-standard);
+}
+.buzz-tabs[data-variant="chrome"] .buzz-tabs-list {
+  height: 2.5rem;
+  gap: 0;
+}
+.buzz-tabs[data-variant="chrome"] .buzz-tabs-tab {
+  @apply text-label-sm;
+  height: 2.5rem;
+  padding: 0 var(--space-5);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.buzz-tabs[data-variant="chrome"] .buzz-tabs-item + .buzz-tabs-item {
+  box-shadow: inset 1px 0 0 var(--border-standard);
+}
+.buzz-tabs[data-variant="chrome"] .buzz-tabs-indicator {
+  top: auto;
+  bottom: 0;
+  height: 2px;
+  background: var(--affordance-accent-prominent);
+  box-shadow: none;
+}
+
+/* --- Sidebar scope filter: an ink frame; the selection is an ink fill. ----- */
+.buzz-tabs[data-variant="segmented"] {
+  padding: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--border-prominent);
+}
+.buzz-tabs[data-variant="segmented"] .buzz-tabs-list {
+  gap: 0;
+}
+.buzz-tabs[data-variant="segmented"] .buzz-tabs-tab {
+  @apply text-label-sm;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.buzz-tabs[data-variant="segmented"] .buzz-tabs-tab[data-selected] {
+  color: var(--text-inverse);
+}
+.buzz-tabs[data-variant="segmented"] .buzz-tabs-indicator {
+  background: var(--text-standard);
+  box-shadow: none;
+}
+
+/* --- Sidebar selection: a jade tint with ink text, not a solid fill. Scoped
+   to the sidebar subtree so upstream's root-level role (and its test) keep
+   their meaning; accent-12 on accent-3 is about 11:1 in both modes. ------- */
+#shell-navigation {
+  --surface-sidebar-selected: var(--accent-3);
+  --text-sidebar-selected: var(--accent-12);
+}
+
+/* --- Sidebar section headings: kickers over a hairline. -------------------- */
+#shell-navigation
+:is(.navigation-section-label, summary, .buzz-content-header-title) {
+  @apply text-label-sm;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--text-subtle);
+}
+#shell-navigation .navigation-section-heading {
+  box-shadow: inset 0 -1px 0 var(--border-standard);
+}
+
+/* --- Messages: square, filled by colour (see minni.css), never framed. ---- */
+:root [data-message-action-anchor] {
+  --message-radius: 0px;
+}
+
+/* --- Composer: the drawn frame is the object. ------------------------------ */
+:root [data-composer-surface] {
+  border-color: var(--border-prominent);
+}
+
+/* --- Avatars and squircle buttons: square. The status dot keeps its circle,
+   but loses its cutout: the cutout masks are drawn for round avatars. ------- */
+:root [data-avatar-shape] {
+  border-radius: 0;
+  mask: none;
+}
+.buzz-button[data-icon-shape="squircle"]::before {
+  mask: none;
+}
+
+/* --- First launch. Light uses public/shell-gradient.png, which this fork
+   replaces with flat sage paper. Dark is a literal gradient in the identity
+   module, so the screen's own label hook flattens it to the ink ground. ---- */
+:root[data-color-mode="dark"]
+main:is(
+  [aria-labelledby="identity-landing-title"],
+  [aria-labelledby="identity-setup-title"]
+) {
+  background: var(--bg-app);
+}

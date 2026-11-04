@@ -62,6 +62,9 @@
    step 10 and pressed: each accent's hover and press, retuned to move clearly
    off step 9 while staying clean rather than muddy. */
 :root {
+  /* Branded onboarding palette; dark mode adds the approved 30% black tint. */
+  --brand-chartreuse: #d7d72e;
+  --brand-chartreuse-dimmed: color-mix(in srgb, #d7d72e 70%, black);
   --magenta-1-light: #fffbfc;
   --magenta-2-light: #fff7fa;
   --magenta-3-light: #ffeef3;
@@ -541,6 +544,70 @@
   --orange-12: #582d1d;
 }
 
+/* >>> minni fork: palette owners and light binding.
+   minni jade ramp from the Minni Design System (jade-100…900, jade-text,
+   jade-on-ink). Steps 3, 5, 8, 11 and 12 are the system's own values; the
+   rest are interpolated on the same hue. The strong fill (step 9) is
+   jade-600, not the brand jade #4e8a78: white on #4e8a78 is 4.01:1 and fails
+   WCAG AA for text, which check-contrast caught. Hover (10) and pressed step
+   down once more each, as the brand's interaction rule says. The logo keeps
+   #4e8a78; it is artwork, not a text surface. Kept as one fenced block so an
+   upstream rebase touches it only if upstream edits these exact lines. */
+:root {
+  --minni-1-light: #fafcfb;
+  --minni-2-light: #f3f8f6;
+  --minni-3-light: #e4efea;
+  --minni-4-light: #d7e8e0;
+  --minni-5-light: #c9e0d6;
+  --minni-6-light: #b3d2c5;
+  --minni-7-light: #a0c7b8;
+  --minni-8-light: #8fbcac;
+  --minni-9-light: #457b6b;
+  --minni-10-light: #3e6f60;
+  --minni-11-light: #376255;
+  --minni-12-light: #223c34;
+  --minni-contrast-light: #ffffff;
+  --minni-ink-light: #ffffff;
+  --minni-pressed-light: #2f5449;
+  --minni-link-light: var(--minni-11-light);
+  --minni-link-hover-light: var(--minni-3-light);
+  --minni-1-dark: #0e1110;
+  --minni-2-dark: #131816;
+  --minni-3-dark: #1a2420;
+  --minni-4-dark: #1f2e28;
+  --minni-5-dark: #253831;
+  --minni-6-dark: #2d453c;
+  --minni-7-dark: #37554a;
+  --minni-8-dark: #46705f;
+  --minni-9-dark: #457b6b;
+  --minni-10-dark: #3e6f60;
+  --minni-11-dark: #a9cfc2;
+  --minni-12-dark: #e4efea;
+  --minni-contrast-dark: #ffffff;
+  --minni-ink-dark: #ffffff;
+  --minni-pressed-dark: #2f5449;
+  --minni-link-dark: var(--minni-11-dark);
+  --minni-link-hover-dark: var(--minni-3-dark);
+}
+
+.light,
+[data-color-mode="light"],
+:root {
+  --minni-1: var(--minni-1-light);
+  --minni-2: var(--minni-2-light);
+  --minni-3: var(--minni-3-light);
+  --minni-4: var(--minni-4-light);
+  --minni-5: var(--minni-5-light);
+  --minni-6: var(--minni-6-light);
+  --minni-7: var(--minni-7-light);
+  --minni-8: var(--minni-8-light);
+  --minni-9: var(--minni-9-light);
+  --minni-10: var(--minni-10-light);
+  --minni-11: var(--minni-11-light);
+  --minni-12: var(--minni-12-light);
+}
+/* <<< minni fork */
+
 :root[data-color-mode="dark"],
 [data-color-mode="dark"],
 .dark {
@@ -746,6 +813,25 @@
   --orange-12: #ffe0c2;
 }
 
+/* >>> minni fork: dark binding. */
+:root[data-color-mode="dark"],
+[data-color-mode="dark"],
+.dark {
+  --minni-1: var(--minni-1-dark);
+  --minni-2: var(--minni-2-dark);
+  --minni-3: var(--minni-3-dark);
+  --minni-4: var(--minni-4-dark);
+  --minni-5: var(--minni-5-dark);
+  --minni-6: var(--minni-6-dark);
+  --minni-7: var(--minni-7-dark);
+  --minni-8: var(--minni-8-dark);
+  --minni-9: var(--minni-9-dark);
+  --minni-10: var(--minni-10-dark);
+  --minni-11: var(--minni-11-dark);
+  --minni-12: var(--minni-12-dark);
+}
+/* <<< minni fork */
+
 /* ============================================================
    LAYER 1 — FAMILIES
    The jobs a hue does. Steps are named for their job because a
@@ -867,6 +953,7 @@
   --blur-lg: 32px;
 
   /* --- Elevation. Controls, floating surfaces and workspace panels. --- */
+  --shadow-card: 0 16px 40px rgba(35, 30, 30, 0.06);
   --shadow-panel:
     0 0 0 1px rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06),
     0 2px 4px rgba(0, 0, 0, 0.04);
@@ -1210,7 +1297,8 @@
   --affordance-floating-selected: var(--affordance-subtle-pressed);
   --border-floating-control: var(--border-prominent);
   --affordance-selected: var(--neutral-3);
-  --affordance-disabled: var(--neutral-3);
+  --affordance-disabled: var(--neutral-4);
+  --surface-onboarding: var(--brand-chartreuse);
   --affordance-danger: var(--red-3);
   --affordance-danger-hover: var(--red-4);
   --affordance-danger-pressed: var(--red-5);
@@ -1252,6 +1340,7 @@
   --affordance-mention-own: var(--affordance-mention);
   --affordance-mention-own-hover: var(--affordance-mention-hover);
   --text-mention-own: var(--text-mention);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.08);
   --shadow-panel: 0 0 0 1px rgba(255, 255, 255, 0.08);
   --surface-base: var(--neutral-1);
   --surface-panel: var(--neutral-3);
@@ -1353,7 +1442,8 @@
   --affordance-floating-selected: var(--neutral-6);
   --border-floating-control: var(--neutral-9);
   --affordance-selected: var(--neutral-5);
-  --affordance-disabled: var(--neutral-3);
+  --affordance-disabled: var(--neutral-5);
+  --surface-onboarding: var(--brand-chartreuse-dimmed);
   --affordance-danger: var(--red-3);
   --affordance-danger-hover: var(--red-4);
   --affordance-danger-pressed: var(--red-5);
@@ -1466,6 +1556,7 @@
   --size-resize-seam: 0.875rem;
   --radius-panel: var(--corner-panel);
   --radius-control: var(--corner-control);
+  --radius-card: 2rem;
   --radius-container: var(--corner-container);
   --radius-row: var(--corner-row);
   /* Independent icon controls use an even contour on all four corners. */
@@ -1933,6 +2024,58 @@
   --accent-overlay-quiet-dark: var(--shade-quiet-fill);
   --accent-overlay-highlight-dark: var(--shade-fill);
 }
+
+/* >>> minni fork: the minni accent family. Default in this fork (see
+   shared/theme/accent.ts and public/appearance-init.js). White ink on jade,
+   as the brand's primary button. */
+:root[data-accent="minni"],
+[data-accent="minni"] {
+  --accent-1-light: var(--minni-1-light);
+  --accent-2-light: var(--minni-2-light);
+  --accent-3-light: var(--minni-3-light);
+  --accent-4-light: var(--minni-4-light);
+  --accent-5-light: var(--minni-5-light);
+  --accent-6-light: var(--minni-6-light);
+  --accent-7-light: var(--minni-7-light);
+  --accent-8-light: var(--minni-8-light);
+  --accent-9-light: var(--minni-9-light);
+  --accent-10-light: var(--minni-10-light);
+  --accent-11-light: var(--minni-11-light);
+  --accent-12-light: var(--minni-12-light);
+  --accent-contrast-light: var(--minni-contrast-light);
+  --accent-ink-light: var(--minni-ink-light);
+  --accent-pressed-light: var(--minni-pressed-light);
+  --accent-link-light: var(--minni-link-light);
+  --accent-link-hover-light: var(--minni-link-hover-light);
+  --accent-overlay-light: var(--shade-strong-fill);
+  --accent-overlay-hover-light: var(--shade-strong-hover-fill);
+  --accent-overlay-soft-light: var(--shade-soft-fill);
+  --accent-overlay-quiet-light: var(--shade-quiet-fill);
+  --accent-overlay-highlight-light: var(--shade-fill);
+  --accent-1-dark: var(--minni-1-dark);
+  --accent-2-dark: var(--minni-2-dark);
+  --accent-3-dark: var(--minni-3-dark);
+  --accent-4-dark: var(--minni-4-dark);
+  --accent-5-dark: var(--minni-5-dark);
+  --accent-6-dark: var(--minni-6-dark);
+  --accent-7-dark: var(--minni-7-dark);
+  --accent-8-dark: var(--minni-8-dark);
+  --accent-9-dark: var(--minni-9-dark);
+  --accent-10-dark: var(--minni-10-dark);
+  --accent-11-dark: var(--minni-11-dark);
+  --accent-12-dark: var(--minni-12-dark);
+  --accent-contrast-dark: var(--minni-contrast-dark);
+  --accent-ink-dark: var(--minni-ink-dark);
+  --accent-pressed-dark: var(--minni-pressed-dark);
+  --accent-link-dark: var(--minni-link-dark);
+  --accent-link-hover-dark: var(--minni-link-hover-dark);
+  --accent-overlay-dark: var(--shade-strong-fill);
+  --accent-overlay-hover-dark: var(--shade-strong-hover-fill);
+  --accent-overlay-soft-dark: var(--shade-soft-fill);
+  --accent-overlay-quiet-dark: var(--shade-quiet-fill);
+  --accent-overlay-highlight-dark: var(--shade-fill);
+}
+/* <<< minni fork */
 
 /* Vibe changes bubble contrast only. Shared controls retain their neutral roles. */
 :root[data-color-level="touch"],

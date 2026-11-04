@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 20" aria-hidden="true">
+  <!-- minni mark on ink: the ramp shifts up one step so the lightest chevron holds. -->
+  <g fill="none" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M2 2 8 10 2 18" stroke="#a9cfc2"/>
+    <path d="M14 2 20 10 14 18" stroke="#77b09c"/>
+    <path d="M26 2 32 10 26 18" stroke="#4e8a78"/>
+  </g>
+</svg>
